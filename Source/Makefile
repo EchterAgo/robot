@@ -29,7 +29,7 @@ ifeq ($(mode), debug)
 	CXXFLAGS = -std=c++11 -Wall -pedantic-errors -fno-rtti -O0 -g -DDEBUG
 
 	ifeq ($(UNAME), Darwin)
-		CXXFLAGS += -stdlib=libc++ -x objective-c++
+		CXXFLAGS += -stdlib=libc++ -x objective-c++ -mmacosx-version-min=10.11
 	endif
 
 else
@@ -38,7 +38,7 @@ else
 	CXXFLAGS = -std=c++11 -Wall -pedantic-errors -fno-rtti -O3 -DNDEBUG
 
 	ifeq ($(UNAME), Darwin)
-		CXXFLAGS += -stdlib=libc++ -x objective-c++
+		CXXFLAGS += -stdlib=libc++ -x objective-c++ -mmacosx-version-min=10.11
 	else
 		CXXFLAGS += -s
 	endif
