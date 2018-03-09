@@ -43,6 +43,12 @@ ROBOT_NS_BEGIN
 // Locals                                                                     //
 //----------------------------------------------------------------------------//
 
+#ifdef ROBOT_OS_MAC
+
+static CGPoint g_lastPosition;
+
+#endif
+
 #ifdef ROBOT_OS_LINUX
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -174,7 +180,7 @@ void Mouse::Press (Button button) const
 
 	// Retrieve the current mouse position
 	CGEventRef pos = CGEventCreate (src);
-	CGPoint p = CGEventGetLocation (pos);
+	CGPoint p = g_lastPosition;
 	CFRelease (pos);
 
 	// Create a press event
@@ -303,7 +309,7 @@ void Mouse::Release (Button button) const
 
 	// Retrieve the current mouse position
 	CGEventRef pos = CGEventCreate (src);
-	CGPoint p = CGEventGetLocation (pos);
+	CGPoint p = g_lastPosition;
 	CFRelease (pos);
 
 	// Create a release event
@@ -580,6 +586,7 @@ void Mouse::SetPos (uint32 x, uint32 y)
 #ifdef ROBOT_OS_MAC
 
 	CGPoint position = CGPointMake (x, y);
+	g_lastPosition = position;
 	// Create an HID hardware event source
 	CGEventSourceRef src = CGEventSourceCreate
 		(kCGEventSourceStateHIDSystemState);
