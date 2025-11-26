@@ -5,7 +5,7 @@ include(cmake/prelude.cmake)
 project(
     robot
     VERSION 2.0.0
-    DESCRIPTION "Native cross-platform system automation "
+    DESCRIPTION "Native cross-platform system automation"
     HOMEPAGE_URL "http://getrobot.net/"
     LANGUAGES CXX
 )
