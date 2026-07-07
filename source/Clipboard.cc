@@ -242,9 +242,9 @@ string Clipboard::GetText (void)
 		!clipboard.Open (nullptr)) return result;
 
 	// Get the clipboard data in defined format
-	if (memory = GetClipboardData (TEXT_FORMAT))
+	if ((memory = GetClipboardData (TEXT_FORMAT)))
 	{
-		if (buffer = (LPTSTR) GlobalLock (memory))
+		if ((buffer = (LPTSTR) GlobalLock (memory)))
 		{
 			// Convert clipboard to UTF-8
 			result = _UTF8Encode (buffer);
@@ -303,9 +303,9 @@ bool Clipboard::SetText (const char* text)
 	auto size = (data.size() + 1) * sizeof (TCHAR);
 
 	// Allocate global memory for storing text data
-	if (memory = GlobalAlloc (GMEM_MOVEABLE, size))
+	if ((memory = GlobalAlloc (GMEM_MOVEABLE, size)))
 	{
-		if (buffer = (LPTSTR) GlobalLock (memory))
+		if ((buffer = (LPTSTR) GlobalLock (memory)))
 		{
 			// Copy the clipboard data buffer
 			memcpy (buffer, data.data(), size);
@@ -422,7 +422,7 @@ bool Clipboard::GetImage (Image& image)
 		!clipboard.Open (nullptr)) return false;
 
 	// Get the clipboard data in image format
-	if (memory = GetClipboardData (CF_BITMAP))
+	if ((memory = GetClipboardData (CF_BITMAP)))
 	{
 		// Attempt to get bitmap information from handle
 		if (GetObject (memory, sizeof (bitmap), &bitmap))
