@@ -13,24 +13,23 @@
 
 #pragma once
 
-#include "robot/Types.h"
 #include <memory>
 #include <string>
 #include <vector>
 
+#include "robot/Types.h"
+
 ROBOT_NS_BEGIN
-	class Process;
-	class Memory;
-	class Module;
-	class Window;
+class Process;
+class Memory;
+class Module;
+class Window;
 
 #ifdef ROBOT_OS_WIN
-	#pragma warning (push)
-	// Ignore the VS C4251 warning
-	#pragma warning (disable:4251)
+#  pragma warning(push)
+// Ignore the VS C4251 warning
+#  pragma warning(disable : 4251)
 #endif
-
-
 
 //----------------------------------------------------------------------------//
 // Types                                                                      //
@@ -48,8 +47,6 @@ typedef std::vector<Window> WindowList;
 
 typedef std::vector<Process> ProcessList;
 
-
-
 //----------------------------------------------------------------------------//
 // Classes                                                                    //
 //----------------------------------------------------------------------------//
@@ -59,47 +56,47 @@ typedef std::vector<Process> ProcessList;
 class ROBOT_EXPORT Process
 {
 public:
-	explicit			Process			(int32 pid = 0);
+  explicit Process(int32 pid = 0);
 
 public:
-	bool				 Open			(int32 pid);
-	void				Close			(void);
+  bool Open(int32 pid);
+  void Close(void);
 
-	bool				IsValid			(void) const;
-	bool				Is64Bit			(void) const;
-	bool				IsDebugged		(void) const;
+  bool IsValid(void) const;
+  bool Is64Bit(void) const;
+  bool IsDebugged(void) const;
 
-	int32				GetPID			(void) const;
-	uintptr				GetHandle		(void) const;
+  int32 GetPID(void) const;
+  uintptr GetHandle(void) const;
 
-	std::string			GetName			(void) const;
-	std::string			GetPath			(void) const;
+  std::string GetName(void) const;
+  std::string GetPath(void) const;
 
-	void				Exit			(void);
-	void				Kill			(void);
-	bool				HasExited		(void) const;
+  void Exit(void);
+  void Kill(void);
+  bool HasExited(void) const;
 
-	ModuleList			GetModules		(const char* name  = nullptr) const;
-	WindowList			GetWindows		(const char* title = nullptr) const;
-	static ProcessList	GetList			(const char* name  = nullptr);
+  ModuleList GetModules(const char* name = nullptr) const;
+  WindowList GetWindows(const char* title = nullptr) const;
+  static ProcessList GetList(const char* name = nullptr);
 
-	static Process		GetCurrent		(void);
-	static bool			IsSys64Bit		(void);
+  static Process GetCurrent(void);
+  static bool IsSys64Bit(void);
 
 public:
-	bool				operator ==		(const Process& process) const;
-	bool				operator !=		(const Process& process) const;
+  bool operator==(const Process& process) const;
+  bool operator!=(const Process& process) const;
 
-	bool				operator ==		(int32 pid) const;
-	bool				operator !=		(int32 pid) const;
+  bool operator==(int32 pid) const;
+  bool operator!=(int32 pid) const;
 
 private:
-	struct Data;
-	std::shared_ptr<Data> mData;		// Shared information
+  struct Data;
+  std::shared_ptr<Data> mData;  // Shared information
 };
 
 #ifdef ROBOT_OS_WIN
-	#pragma warning (pop)
+#  pragma warning(pop)
 #endif
 
 ROBOT_NS_END

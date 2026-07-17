@@ -13,13 +13,11 @@
 
 #pragma once
 
+#include "robot/Bounds.h"
+#include "robot/Color.h"
 #include "robot/Enum.h"
 #include "robot/Hash.h"
-
-#include "robot/Color.h"
 #include "robot/Image.h"
-
-#include "robot/Range.h"
 #include "robot/Point.h"
+#include "robot/Range.h"
 #include "robot/Size.h"
-#include "robot/Bounds.h"

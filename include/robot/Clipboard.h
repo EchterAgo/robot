@@ -13,11 +13,10 @@
 
 #pragma once
 
-#include "robot/Types.h"
 #include <string>
+
+#include "robot/Types.h"
 ROBOT_NS_BEGIN
-
-
 
 //----------------------------------------------------------------------------//
 // Classes                                                                    //
@@ -28,27 +27,27 @@ ROBOT_NS_BEGIN
 class ROBOT_EXPORT Clipboard
 {
 private:
-	 Clipboard							(void);
-	~Clipboard							(void);
-	 Clipboard							(const Clipboard&  clipboard);
-	 Clipboard							(      Clipboard&& clipboard);
+  Clipboard(void);
+  ~Clipboard(void);
+  Clipboard(const Clipboard& clipboard);
+  Clipboard(Clipboard&& clipboard);
 
 public:
-	static bool			Clear			(void);
+  static bool Clear(void);
 
-	static bool			HasText			(void);
-	static std::string	GetText			(void);
-	static bool			SetText			(const char* string);
+  static bool HasText(void);
+  static std::string GetText(void);
+  static bool SetText(const char* string);
 
-	static bool			HasImage		(void);
-	static bool			GetImage		(      Image& image);
-	static bool			SetImage		(const Image& image);
+  static bool HasImage(void);
+  static bool GetImage(Image& image);
+  static bool SetImage(const Image& image);
 
-	static uint64		GetSequence		(void);
+  static uint64 GetSequence(void);
 
 private:
-	Clipboard&			operator =		(const Clipboard&  clipboard);
-	Clipboard&			operator =		(      Clipboard&& clipboard);
+  Clipboard& operator=(const Clipboard& clipboard);
+  Clipboard& operator=(Clipboard&& clipboard);
 };
 
 ROBOT_NS_END
