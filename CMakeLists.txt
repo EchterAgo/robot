@@ -106,6 +106,26 @@ target_include_directories(
 
 target_compile_features(robot_robot PUBLIC cxx_std_17)
 
+# On macOS, Clipboard.cc and Screen.cc include AppKit (Objective-C headers).
+# They need to be compiled as Objective-C++ (.mm) only on macOS. The OBJCXX
+# language must be explicitly enabled first, otherwise CMake silently ignores
+# the LANGUAGE source file property below and keeps compiling the file as
+# plain CXX.
+# Note: the actual source-file property that forces a specific compiler
+# language is LANGUAGE, not COMPILE_LANGUAGE (the latter only exists as a
+# generator-expression context, e.g. $<COMPILE_LANGUAGE:...>, and is not a
+# settable source file property).
+# On Windows/Linux they're pure C++ (AppKit includes are behind #ifdef ROBOT_OS_MAC).
+# https://cmake.org/cmake/help/latest/prop_sf/LANGUAGE.html
+if(APPLE)
+    enable_language(OBJCXX)
+    set_source_files_properties(
+        source/Clipboard.cc
+        source/Screen.cc
+        PROPERTIES LANGUAGE OBJCXX
+    )
+endif()
+
 # ---- Install rules ----
 
 if(NOT CMAKE_SKIP_INSTALL_RULES)
